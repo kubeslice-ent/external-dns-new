@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: external-dns-sp
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: external-dns-sp
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get","watch","list"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get","watch","list"]
+  - apiGroups: ["networking","networking.k8s.io"]
+    resources: ["ingresses"]
+    verbs: ["get","watch","list"]
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get","watch","list"]
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get","watch","list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: external-dns-sp-viewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: external-dns-sp
+subjects:
+- kind: ServiceAccount
+  name: external-dns-sp
+  namespace: external-dns
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns-sp
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: external-dns-sp
+  template:
+    metadata:
+      labels:
+        app: external-dns-sp
+    spec:
+      serviceAccountName: external-dns-sp
+      containers:
+      - name: external-dns
+        image: aveshadev/external-dns:v0.12.2
+        args:
+        - --source=service
+        - --provider=stackpath
+        - --txt-owner-id=gcp-sp
+        - --domain-filter=stackpath.marchesi.dev
+        env:
+        - name: STACKPATH_CLIENT_ID
+          value: "218103f25d9d5e8fb951880f51a2c0bb"
+        - name: STACKPATH_CLIENT_SECRET
+          value: "2540cb01829edaeb6e96dc11067019e2c8a7353c24c7f56f4ca9c72e3bc05480"
+        - name: STACKPATH_STACK_ID
+          value: "my-default-stack-a1723a"
