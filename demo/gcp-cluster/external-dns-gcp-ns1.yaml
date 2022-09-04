@@ -27,7 +27,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: external-dns-viewer
+  name: external-dns-ns1-viewer
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -60,7 +60,14 @@ spec:
         - --source=service
         - --provider=ns1
         - --txt-owner-id=gcp-ns1
-        - --domain-filter=ns1.marchesi.dev
+        - --domain-filter=wmar.io
         env:
         - name: NS1_APIKEY
           value: "uCkNNYwJ4WJpSEqS6yDu"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi

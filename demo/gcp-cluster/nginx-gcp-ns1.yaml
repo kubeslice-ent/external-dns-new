@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: nginx-cox
 spec:
+  replicas: 4
   selector:
     matchLabels:
-      app: nginx
+      app: nginx-cox
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx-cox
     spec:
       containers:
       - image: nginx
-        name: nginx
+        name: nginx-cox
         ports:
         - containerPort: 80
         resources:
@@ -27,12 +28,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: nginx-cox
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: marchesi.dev
+    external-dns.alpha.kubernetes.io/hostname: ns1.wmar.io
+    external-dns.alpha.kubernetes.io/ttl: "1"
 spec:
   selector:
-    app: nginx
+    app: nginx-cox
   type: LoadBalancer
   ports:
     - protocol: TCP

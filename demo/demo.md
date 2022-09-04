@@ -162,7 +162,7 @@ spec:
         - --source=service
         - --provider=ns1
         - --txt-owner-id=gcp-ns1
-        - --domain-filter=ns1.marchesi.dev
+        - --domain-filter=.wmar.io
         env:
         - name: NS1_APIKEY
           value: <NS1_APIKEY>
@@ -269,5 +269,5 @@ Expected Result: 2 A Records for `stackpath.marchesi.dev`, each pointing to the 
 
 ## NS1
 
-Expected Result: 2 A Records for `stackpath.marchesi.dev`, each pointing to the external IP of one of the `nginx` Load Balancers.
+Expected Result: 2 A Records for `ns1.wmar.io`, each pointing to the external IP of one of the `nginx` Load Balancers.
 
