@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-sp
+spec:
+  selector:
+    matchLabels:
+      app: nginx-sp
+  template:
+    metadata:
+      labels:
+        app: nginx-sp
+    spec:
+      containers:
+      - image: nginx
+        name: nginx-sp
+        ports:
+        - containerPort: 80
+        resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-sp
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: stackpath.marchesi.dev
+    external-dns.alpha.kubernetes.io/ttl: "1"
+spec:
+  selector:
+    app: nginx-sp
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

@@ -60,7 +60,7 @@ spec:
         - --source=service
         - --provider=stackpath
         - --txt-owner-id=cox-stackpath
-        #- --dry-run
+        - --domain-filter=marchesi.dev
         env:
         - name: STACKPATH_CLIENT_ID
           value: "218103f25d9d5e8fb951880f51a2c0bb"
@@ -68,3 +68,10 @@ spec:
           value: "2540cb01829edaeb6e96dc11067019e2c8a7353c24c7f56f4ca9c72e3bc05480"
         - name: STACKPATH_STACK_ID
           value: "my-default-stack-a1723a"
+        resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi

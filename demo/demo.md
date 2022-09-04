@@ -1,6 +1,17 @@
+# Table of Contents
+
++ [**Topology**](#topology)
+  + [**Cox Cluster**](#cox-cluster)
+  + [**GCP Cluster**](#gcp-cluster)
++ [**Initial Expected DNS Provider States**](#initial-expected-dns-provider-states)
+  + [**Stackpath**](#stackpath)
+  + [**NS1**](#ns1)
+
+---
+
 # Topology
 
-[TOC]
+[**T**]()
 
 ---
 
@@ -183,7 +194,58 @@ replicaset.apps/external-dns-sp-7dc8b77f8f    1         1         1       5m39s
 
 Deployment Manifest File:
 
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-sp
+spec:
+  selector:
+    matchLabels:
+      app: nginx-sp
+  template:
+    metadata:
+      labels:
+        app: nginx-sp
+    spec:
+      containers:
+      - image: nginx
+        name: nginx-sp
+        ports:
+        - containerPort: 80
+        resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-sp
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: stackpath.marchesi.dev
+    external-dns.alpha.kubernetes.io/ttl: "1"
+spec:
+  selector:
+    app: nginx-sp
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+```
+
 Succesful Deployment:
+
+`k get services -n nginx`
+
+```
+NAME       TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)        AGE
+nginx-sp   LoadBalancer   10.7.40.127   35.230.187.66   80:32556/TCP   12m
+```
 
 ---
 

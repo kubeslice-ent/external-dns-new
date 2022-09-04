@@ -1,32 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-cox-sp
+  name: nginx
 spec:
   selector:
     matchLabels:
-      app: nginx-cox-sp
+      app: nginx
   template:
     metadata:
       labels:
-        app: nginx-cox-sp
+        app: nginx
     spec:
       containers:
       - image: nginx
-        name: nginx-cox-sp
+        name: nginx
         ports:
         - containerPort: 80
+        resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-cox-sp
+  name: nginx
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: cox-sp.marchesi.dev
-    external-dns.alpha.kubernetes.io/ttl: "0"
+    external-dns.alpha.kubernetes.io/hostname: marchesi.dev
 spec:
   selector:
-    app: nginx-cox-sp
+    app: nginx
   type: LoadBalancer
   ports:
     - protocol: TCP
