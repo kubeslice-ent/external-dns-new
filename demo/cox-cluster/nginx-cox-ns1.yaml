@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-sp
+  name: nginx-ns1
 spec:
   selector:
     matchLabels:
-      app: nginx-sp
+      app: nginx-ns1
   template:
     metadata:
       labels:
-        app: nginx-sp
+        app: nginx-ns1
     spec:
       containers:
       - image: nginx
-        name: nginx-sp
+        name: nginx-ns1
         ports:
         - containerPort: 80
         resources:
@@ -27,18 +27,18 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-sp
+  name: nginx-ns1
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: stackpath.marchesi.dev
+    external-dns.alpha.kubernetes.io/hostname: ns1.wmar.io
     external-dns.alpha.kubernetes.io/ttl: "1"
 spec:
   externalIPs:
   - 98.190.75.21
   selector:
-    app: nginx-sp
+    app: nginx-ns1
   type: LoadBalancer
   ports:
-    - nodePort: 30080
+    - nodePort: 30081
       protocol: TCP
       port: 80
       targetPort: 80
