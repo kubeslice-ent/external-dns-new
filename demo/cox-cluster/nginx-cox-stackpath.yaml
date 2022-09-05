@@ -32,10 +32,12 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: stackpath.marchesi.dev
     external-dns.alpha.kubernetes.io/ttl: "1"
 spec:
+  externalIPs:
+  - 98.190.75.21
   selector:
     app: nginx-sp
-  type: NodePort
+  type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 5051
-      targetPort: 5051
+      port: 80
+      targetPort: 80
