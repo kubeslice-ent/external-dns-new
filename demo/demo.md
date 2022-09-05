@@ -2,7 +2,19 @@
 
 + [**Topology**](#topology)
   + [**Cox Cluster**](#cox-cluster)
+    + **[External DNS](#namespace-external-dns)**
+      + [Stackpath](#external-dns-stackpath) 
+      + [NS1](#external-dns-ns1) 
+    + **[Nginx Deployments](#namespace-nginx)**
+      + **[Stackpath](#deployment-nginx-stackpath)**
+      + **[NS1](#deployment-nginx-ns1)**
   + [**GCP Cluster**](#gcp-cluster)
+    + **[External DNS](#namespace-external-dns-1)**
+      + [Stackpath](#external-dns-stackpath-1) 
+      + [NS1](#external-dns-ns1-1) 
+    + **[Nginx Replica Sets](#namespace-nginx-1)**
+      + **[Stackpath](#replica-set-nginx-stackpath)**
+      + **[NS1](#replica-set-nginx-ns1)**
 + [**Initial Expected DNS Provider States**](#initial-expected-dns-provider-states)
   + [**Stackpath**](#stackpath)
   + [**NS1**](#ns1)
@@ -658,9 +670,12 @@ nginx-sp    LoadBalancer   10.7.37.15    35.245.96.170   80:30080/TCP   24h
 
 Expected Result: 2 A Records for `stackpath.marchesi.dev`, each pointing to the external IP of one of the `nginx` Load Balancers.
 
+![Stackpath Expected Result](assets/sp-expected-1.png)
 
+---
 
 ## NS1
 
 Expected Result: 2 A Records for `ns1.wmar.io`, each pointing to the external IP of one of the `nginx` Load Balancers.
 
+![NS1 Expected Result](assets/ns1-expected-1.png)
