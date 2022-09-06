@@ -10,7 +10,7 @@ const CoxFailCounter = new Counter('Cox Fail Counter');
 const CoxIP = '98:190:75:21';
 
 export const options = {
-    vus: 300,
+    vus: 200,
     duration: '1h',
     dns: {
         ttl: '0',
@@ -24,7 +24,7 @@ export const options = {
 export default function () {
     const res = http.get('http://stackpath.wmar1.com:30080/index.html');
     
-    if (res.status != 300) {
+    if (res.status != 200) {
         if (res.remote_ip == CoxIP) {
             CoxFailCounter.add(1);
         } else {
@@ -38,6 +38,6 @@ export default function () {
         }
     }
 
-    sleep(0.1);
+    sleep(0.05);
 }
 
