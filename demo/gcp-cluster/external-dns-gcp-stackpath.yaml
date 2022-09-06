@@ -60,7 +60,7 @@ spec:
         - --source=service
         - --provider=stackpath
         - --txt-owner-id=gcp-sp
-        - --domain-filter=marchesi.dev
+        - --domain-filter=wmar1.com
         env:
         - name: STACKPATH_CLIENT_ID
           value: "218103f25d9d5e8fb951880f51a2c0bb"

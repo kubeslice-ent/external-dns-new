@@ -29,7 +29,7 @@ kind: Service
 metadata:
   name: nginx-sp
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: stackpath.marchesi.dev
+    external-dns.alpha.kubernetes.io/hostname: stackpath.wmar1.com
     external-dns.alpha.kubernetes.io/ttl: "1"
 spec:
   externalIPs:
