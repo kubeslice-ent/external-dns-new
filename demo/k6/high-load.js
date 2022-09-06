@@ -10,7 +10,7 @@ const CoxFailCounter = new Counter('Cox Fail Counter');
 const CoxIP = '98:190:75:21';
 
 export const options = {
-    vus: 200,
+    vus: 300,
     duration: '1h',
     dns: {
         ttl: '0',
