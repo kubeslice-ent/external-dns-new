@@ -24,7 +24,7 @@ export const options = {
 export default function () {
     const res = http.get('http://stackpath.wmar1.com:30080/index.html');
     
-    if (res.status != 200) {
+    if (res.status != 300) {
         if (res.remote_ip == CoxIP) {
             CoxFailCounter.add(1);
         } else {
@@ -38,6 +38,6 @@ export default function () {
         }
     }
 
-    sleep(0.2);
+    sleep(0.1);
 }
 
