@@ -2,9 +2,10 @@ import http from 'k6/http';
 import { sleep } from 'k6';
 import { Counter } from 'k6/metrics';
 
-const GCPCounter = new Counter('GCPCounter');
-const CoxCounter = new Counter('CoxCounter');
-const FailCounter = new Counter('FailCounter');
+const GCPCounter = new Counter('GCP Success Counter');
+const CoxCounter = new Counter('Cox Success Counter');
+const GCPFailCounter = new Counter('GCP Fail Counter');
+const CoxFailCounter = new Counter('Cox Fail Counter');
 
 export const options = {
     vus: 100,
@@ -20,10 +21,13 @@ export const options = {
 
 export default function () {
     const res = http.get('http://stackpath.wmar1.com:30080/index.html');
-    sleep(1);
+    
     if (res.status != 200) {
-        FailCounter.add(1);
-
+        if (res.remote_ip == '98.190.75.21') {
+            CoxFailCounter.add(1);
+        } else {
+            GCPFailCounter.add(1);
+        }
     } else {
         if (res.remote_ip == '98.190.75.21') {
             CoxCounter.add(1);
@@ -31,5 +35,7 @@ export default function () {
             GCPCounter.add(1);
         }
     }
+
+    sleep(0.25);
 }
 
