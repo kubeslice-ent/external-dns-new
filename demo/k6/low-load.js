@@ -9,7 +9,7 @@ const FailCounter = new Counter('Fail Counter');
 const CoxIP = '98.190.75.21';
 
 export const options = {
-    vus: 200,
+    vus: 400,
     duration: '1h',
     dns: {
         ttl: '0',
@@ -22,7 +22,7 @@ export const options = {
 }
 
 export default function () {
-    const res = http.get('http://ns1.wmar.io:30081/');
+    const res = http.get('http://stackpath.wmar1.com:30080/');
     
     if (res.status != 200) {
         FailCounter.add(1);
@@ -34,6 +34,6 @@ export default function () {
         }
     }
 
-    sleep(0.2);
+    sleep(0.5);
 }
 
