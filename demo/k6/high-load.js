@@ -4,8 +4,7 @@ import { Counter } from 'k6/metrics';
 
 const GCPCounter = new Counter('GCP Success Counter');
 const CoxCounter = new Counter('Cox Success Counter');
-const GCPFailCounter = new Counter('GCP Fail Counter');
-const CoxFailCounter = new Counter('Cox Fail Counter');
+const FailCounter = new Counter('Fail Counter');
 
 const CoxIP = '98.190.75.21';
 
@@ -25,11 +24,7 @@ export default function () {
     const res = http.get('http://stackpath.wmar1.com:30080/index.html');
     
     if (res.status != 200) {
-        if (res.remote_ip == CoxIP) {
-            CoxFailCounter.add(1);
-        } else {
-            GCPFailCounter.add(1);
-        }
+        FailCounter.add(1);
     } else {
         if (res.remote_ip == CoxIP) {
             CoxCounter.add(1);
@@ -38,6 +33,6 @@ export default function () {
         }
     }
 
-    sleep(0.05);
+    //sleep(0.05);
 }
 
