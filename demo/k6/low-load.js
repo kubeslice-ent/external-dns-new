@@ -17,11 +17,11 @@ export const options = {
       },
       noConnectionReuse: true,
       noVUConnectionReuse: true,
-      //httpDebug: 'full',
-};
+      httpDebug: 'full',
+}
 
 export default function () {
-    const res = http.get('http://stackpath.wmar1.com:30080/index.html');
+    const res = http.get('http://ns1.wmar.io:30081/index.html');
     
     if (res.status != 200) {
         FailCounter.add(1);
