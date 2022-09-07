@@ -55,7 +55,8 @@ spec:
       serviceAccountName: external-dns-ns1
       containers:
       - name: external-dns
-        image: aveshadev/external-dns:v0.12.2
+        image: wmarchesi123/edns:fix
+        imagePullPolicy: Always
         args:
         - --source=service
         - --provider=ns1

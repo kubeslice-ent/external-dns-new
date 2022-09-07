@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nginx-ns1
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       app: nginx-ns1
@@ -19,10 +19,10 @@ spec:
         - containerPort: 80
         resources:
             requests:
-              cpu: 50m
+              cpu: 200m
               memory: 64Mi
             limits:
-              cpu: 100m
+              cpu: 400m
               memory: 128Mi
 ---
 apiVersion: v1
@@ -46,6 +46,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: ns1.wmar.io
     external-dns.alpha.kubernetes.io/ttl: "1"
+    external-dns.alpha.kubernetes.io/weight: "70"
 spec:
   type: ExternalName
-  externalName: 34.86.56.234
+  externalName: 34.85.229.214
