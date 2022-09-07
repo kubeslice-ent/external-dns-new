@@ -13,6 +13,7 @@ export const options = {
     duration: '1h',
     dns: {
         ttl: '0',
+        //select: 'first',
         policy: 'any',
       },
       noConnectionReuse: true,
@@ -21,7 +22,7 @@ export const options = {
 }
 
 export default function () {
-    const res = http.get('http://ns1.wmar.io:30081/index.html');
+    const res = http.get('http://ns1.wmar.io:30081/');
     
     if (res.status != 200) {
         FailCounter.add(1);
