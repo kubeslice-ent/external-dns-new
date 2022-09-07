@@ -18,7 +18,7 @@ export const options = {
       },
       noConnectionReuse: true,
       noVUConnectionReuse: true,
-      httpDebug: 'full',
+      //httpDebug: 'full',
 }
 
 export default function () {
