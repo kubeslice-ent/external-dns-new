@@ -6,8 +6,8 @@ const GCPCounter = new Counter('GCP Success Counter');
 const CoxCounter = new Counter('Cox Success Counter');
 const FailCounter = new Counter('Fail Counter');
 
-const CoxTime = new Trend('Cox Response Time');
-const GCPTime = new Trend('GCP Response Time');
+const CoxTime = new Trend('Cox Time to First Byte');
+const GCPTime = new Trend('GCP Time to First Byte');
 
 const CoxIP = '98.190.75.21';
 
