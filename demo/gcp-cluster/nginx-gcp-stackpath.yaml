@@ -19,7 +19,7 @@ spec:
         - containerPort: 80
         resources:
             requests:
-              cpu: 100m
+              cpu: 200m
               memory: 64Mi
             limits:
               cpu: 400m
@@ -48,4 +48,4 @@ metadata:
     external-dns.alpha.kubernetes.io/ttl: "1"
 spec:
   type: ExternalName
-  externalName: 35.230.187.66
+  externalName: 35.199.30.247

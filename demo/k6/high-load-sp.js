@@ -39,6 +39,6 @@ export default function () {
         }
     }
 
-    sleep(0.25);
+    //sleep(0.25);
 }
 
