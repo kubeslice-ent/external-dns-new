@@ -49,4 +49,4 @@ metadata:
     external-dns.alpha.kubernetes.io/weight: "100"
 spec:
   type: ExternalName
-  externalName: 35.245.96.170
+  externalName: 35.230.187.66
