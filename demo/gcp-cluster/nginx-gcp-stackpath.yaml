@@ -48,4 +48,4 @@ metadata:
     external-dns.alpha.kubernetes.io/ttl: "1"
 spec:
   type: ExternalName
-  externalName: 34.86.70.115
+  externalName: 35.245.96.170

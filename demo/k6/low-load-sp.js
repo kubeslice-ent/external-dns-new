@@ -1,10 +1,13 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
-import { Counter } from 'k6/metrics';
+import { Counter, Trend } from 'k6/metrics';
 
 const GCPCounter = new Counter('GCP Success Counter');
 const CoxCounter = new Counter('Cox Success Counter');
 const FailCounter = new Counter('Fail Counter');
+
+const CoxTime = new Trend('Cox Response Time');
+const GCPTime = new Trend('GCP Response Time');
 
 const CoxIP = '98.190.75.21';
 
@@ -29,8 +32,10 @@ export default function () {
     } else {
         if (res.remote_ip == CoxIP) {
             CoxCounter.add(1);
+            CoxTime.add(res.timings.duration);
         } else {
             GCPCounter.add(1);
+            GCPTime.add(res.timings.duration);
         }
     }
 
