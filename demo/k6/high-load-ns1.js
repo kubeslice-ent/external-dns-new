@@ -25,7 +25,7 @@ export const options = {
 }
 
 export default function () {
-    const res = http.get('http://stackpath.wmar1.com:30080/');
+    const res = http.get('http://ns1.wmar.io:30081/');
     
     if (res.status != 200) {
         FailCounter.add(1);

@@ -12,7 +12,7 @@ const GCPTime = new Trend('GCP Response Time');
 const CoxIP = '98.190.75.21';
 
 export const options = {
-    vus: 400,
+    vus: 300,
     duration: '1h',
     dns: {
         ttl: '0',
@@ -32,10 +32,10 @@ export default function () {
     } else {
         if (res.remote_ip == CoxIP) {
             CoxCounter.add(1);
-            CoxTime.add(res.timings.duration);
+            CoxTime.add(res.timings.waiting);
         } else {
             GCPCounter.add(1);
-            GCPTime.add(res.timings.duration);
+            GCPTime.add(res.timings.waiting);
         }
     }
 

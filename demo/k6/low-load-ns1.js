@@ -12,7 +12,7 @@ const GCPTime = new Trend('GCP Response Time');
 const CoxIP = '98.190.75.21';
 
 export const options = {
-    vus: 400,
+    vus: 300,
     duration: '1h',
     dns: {
         ttl: '0',
@@ -25,7 +25,7 @@ export const options = {
 }
 
 export default function () {
-    const res = http.get('http://stackpath.wmar1.com:30080/');
+    const res = http.get('http://ns1.wmar.io:30081/');
     
     if (res.status != 200) {
         FailCounter.add(1);
@@ -39,6 +39,6 @@ export default function () {
         }
     }
 
-    sleep(0.25);
+    sleep(0.5);
 }
 
