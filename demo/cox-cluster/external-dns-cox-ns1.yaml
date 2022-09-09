@@ -55,7 +55,7 @@ spec:
       serviceAccountName: external-dns-ns1
       containers:
       - name: external-dns
-        image: wmarchesi123/edns:fix
+        image: aveshadev/external-dns:v0.12.2
         args:
         - --source=service
         - --provider=ns1
@@ -63,7 +63,7 @@ spec:
         - --domain-filter=wmar.io
         env:
         - name: NS1_APIKEY
-          value: "uCkNNYwJ4WJpSEqS6yDu"
+          value: "NS1_APIKEY"
         resources:
           requests:
             cpu: 100m

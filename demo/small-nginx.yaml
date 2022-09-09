@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: small-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: small-nginx
+  template:
+    metadata:
+      labels:
+        app: small-nginx
+    spec:
+      containers:
+      - image: nginx
+        name: small-nginx
+        ports:
+        - containerPort: 80
+        resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 80m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: small-nginx
+spec:
+  selector:
+    app: small-nginx
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
