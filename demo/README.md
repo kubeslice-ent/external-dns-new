@@ -102,7 +102,7 @@ spec:
       serviceAccountName: external-dns-sp
       containers:
       - name: external-dns
-        image: aveshadev/external-dns:v0.12.2
+        image: aveshasystems/external-dns:v0.12.2
         args:
         - --source=service
         - --provider=stackpath
@@ -205,7 +205,7 @@ spec:
       serviceAccountName: external-dns-ns1
       containers:
       - name: external-dns
-        image: aveshadev/external-dns:v0.12.2
+        image: aveshasystems/external-dns:v0.12.2
         args:
         - --source=service
         - --provider=ns1
@@ -443,7 +443,7 @@ spec:
       serviceAccountName: external-dns-sp
       containers:
       - name: external-dns
-        image: aveshadev/external-dns:v0.12.2
+        image: aveshasystems/external-dns:v0.12.2
         args:
         - --source=service
         - --provider=stackpath
@@ -546,7 +546,7 @@ spec:
       serviceAccountName: external-dns-ns1
       containers:
       - name: external-dns
-        image: aveshadev/external-dns:v0.12.2
+        image: aveshasystems/external-dns:v0.12.2
         args:
         - --source=service
         - --provider=ns1

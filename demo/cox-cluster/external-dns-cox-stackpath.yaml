@@ -55,7 +55,7 @@ spec:
       serviceAccountName: external-dns-sp
       containers:
       - name: external-dns
-        image: aveshadev/external-dns:v0.12.2
+        image: aveshasystems/external-dns:v0.12.2
         args:
         - --source=service
         - --provider=stackpath
