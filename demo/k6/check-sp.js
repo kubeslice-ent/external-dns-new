@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
-import { Counter, Trend } from 'k6/metrics';
+import { Counter } from 'k6/metrics';
+import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
 
 const GCPCounter = new Counter('GCP DNS Counter');
 const CoxCounter = new Counter('Cox DNS Counter');
@@ -10,13 +11,13 @@ const CoxIP = '98.190.75.77';
 
 export const options = {
     vus: 200,
-    duration: '10s',
+    duration: '120s',
     dns: {
         ttl: '0',
         policy: 'any',
-      },
-      noConnectionReuse: true,
-      noVUConnectionReuse: true,
+    },
+    noConnectionReuse: true,
+    noVUConnectionReuse: true,
 }
 
 const params = {
@@ -36,20 +37,28 @@ export default function () {
             GCPCounter.add(1);
         }
     }
-    
-    //console.log(JSON.stringify(res));
 
     sleep(.1);
 }
 
 export function handleSummary(data) {
 
-    data.metrics = {
-        'GCP DNS Counter': data.metrics['GCP DNS Counter'],
-        'Cox DNS Counter': data.metrics['Cox DNS Counter'],
-    };
-
-    //return { 'raw-data.json': JSON.stringify(data)};
+    if (("GCP DNS Counter" in data.metrics) && ("Cox DNS Counter" in data.metrics) == true) {
+        data.metrics = {
+            'GCP DNS Counter': data.metrics['GCP DNS Counter'],
+            'Cox DNS Counter': data.metrics['Cox DNS Counter'],
+        };
+    } else if (("GCP DNS Counter" in data.metrics) == true) {
+        data.metrics = {
+            'GCP DNS Counter': data.metrics['GCP DNS Counter'],
+        };
+    } else if (("Cox DNS Counter" in data.metrics) == true) {
+        data.metrics = {
+            'Cox DNS Counter': data.metrics['Cox DNS Counter'],
+        };
+    } else {
+        data.metrics = {};
+    }
 
     return { 'stdout': textSummary(data, { indent: ' ', enableColors: true }) };
 }

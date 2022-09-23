@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
-import { Counter, Trend } from 'k6/metrics';
+import { Counter } from 'k6/metrics';
+import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
 
 const GCPCounter = new Counter('GCP DNS Counter');
 const CoxCounter = new Counter('Cox DNS Counter');
@@ -36,11 +37,7 @@ export default function () {
         } else {
             GCPCounter.add(1);
         }
-
-        //console.log(JSON.stringify(resBody.Answer[0]));
-
     }
-    
     
     sleep(.1);
 }
