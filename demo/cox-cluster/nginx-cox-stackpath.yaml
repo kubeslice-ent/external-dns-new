@@ -33,7 +33,7 @@ metadata:
     external-dns.alpha.kubernetes.io/ttl: "1"
 spec:
   externalIPs:
-  - 98.190.75.21
+  - 98.190.75.77
   selector:
     app: nginx-sp
   type: LoadBalancer

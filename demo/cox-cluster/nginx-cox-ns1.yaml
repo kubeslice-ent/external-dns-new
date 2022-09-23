@@ -31,10 +31,10 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: ns1.wmar.io
     external-dns.alpha.kubernetes.io/ttl: "1"
-    external-dns.alpha.kubernetes.io/weight: "25"
+    external-dns.alpha.kubernetes.io/weight: "30"
 spec:
   externalIPs:
-  - 98.190.75.21
+  - 98.190.75.78
   selector:
     app: nginx-ns1
   type: LoadBalancer

@@ -6,7 +6,7 @@ const GCPCounter = new Counter('GCP Success Counter');
 const CoxCounter = new Counter('Cox Success Counter');
 const FailCounter = new Counter('Fail Counter');
 
-const CoxIP = '98.190.75.21';
+const CoxIP = '98.190.75.78';
 
 export const options = {
     vus: 400,
