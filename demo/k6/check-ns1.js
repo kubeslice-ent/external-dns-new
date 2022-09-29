@@ -14,7 +14,7 @@ export const options = {
     duration: '120s',
     dns: {
         ttl: '0',
-        policy: 'any',
+        policy: 'onlyIPv4',
     },
     noConnectionReuse: true,
     noVUConnectionReuse: true,
