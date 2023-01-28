@@ -25,6 +25,8 @@ The [FAQ](docs/faq.md) contains additional information and addresses several que
 
 To see ExternalDNS in action, have a look at this [video](https://www.youtube.com/watch?v=9HQ2XgL9YVI) or read this [blogpost](https://codemine.be/posts/20190125-devops-eks-externaldns/).
 
+To learn more about Avesha's enhanced version of ExternalDNS, see this [ExternalDNS documentation](https://docs.avesha.io/documentation/enterprise-gtd/0.1.0). 
+
 ## The Latest Release
 
 ---
