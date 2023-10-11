@@ -18,7 +18,7 @@ require (
 	github.com/ans-group/sdk-go v1.10.4
 	github.com/aws/aws-sdk-go v1.44.119
 	github.com/bodgit/tsig v1.2.0
-	github.com/cloudflare/cloudflare-go v0.50.0
+	github.com/cloudflare/cloudflare-go v0.79.0
 	github.com/cloudfoundry-community/go-cfclient v0.0.0-20190201205600-f136f9222381
 	github.com/datawire/ambassador v1.6.0
 	github.com/denverdino/aliyungo v0.0.0-20190125010748-a747050bb1ba
@@ -49,7 +49,7 @@ require (
 	github.com/prometheus/client_golang v1.12.2
 	github.com/scaleway/scaleway-sdk-go v1.0.0-beta.7.0.20210127161313-bd30bebeac4f
 	github.com/sirupsen/logrus v1.9.0
-	github.com/stretchr/testify v1.8.0
+	github.com/stretchr/testify v1.8.4
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.344
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/dnspod v1.0.344
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/privatedns v1.0.344
@@ -60,9 +60,9 @@ require (
 	go.etcd.io/etcd/api/v3 v3.5.4
 	go.etcd.io/etcd/client/v3 v3.5.2
 	go.uber.org/ratelimit v0.2.0
-	golang.org/x/net v0.1.0
+	golang.org/x/net v0.17.0
 	golang.org/x/oauth2 v0.0.0-20220622183110-fd043fe589d2
-	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
+	golang.org/x/sync v0.1.0
 	google.golang.org/api v0.93.0
 	gopkg.in/ns1/ns1-go.v2 v2.0.0-20190322154155-0dafb5275fd1
 	gopkg.in/yaml.v2 v2.4.0
@@ -112,6 +112,7 @@ require (
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-resty/resty/v2 v2.1.1-0.20191201195748-d7b97669fe48 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
+	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt/v4 v4.2.0 // indirect
@@ -126,7 +127,7 @@ require (
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
-	github.com/hashicorp/go-retryablehttp v0.7.1 // indirect
+	github.com/hashicorp/go-retryablehttp v0.7.4 // indirect
 	github.com/hashicorp/go-uuid v1.0.2 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/jcmturner/aescts/v2 v2.0.0 // indirect
@@ -162,7 +163,7 @@ require (
 	github.com/smartystreets/go-aws-auth v0.0.0-20180515143844-0c1422d1fdb9 // indirect
 	github.com/smartystreets/gunit v1.3.4 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/objx v0.4.0 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/terra-farm/udnssdk v1.3.5 // indirect
 	github.com/vektah/gqlparser/v2 v2.5.0 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.2 // indirect
@@ -171,13 +172,13 @@ require (
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.19.1 // indirect
-	golang.org/x/crypto v0.0.0-20220427172511-eb4f295cb31f // indirect
-	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
-	golang.org/x/sys v0.1.0 // indirect
-	golang.org/x/term v0.1.0 // indirect
-	golang.org/x/text v0.4.0 // indirect
-	golang.org/x/time v0.0.0-20220224211638-0e9765cccd65 // indirect
-	golang.org/x/tools v0.1.12 // indirect
+	golang.org/x/crypto v0.14.0 // indirect
+	golang.org/x/mod v0.8.0 // indirect
+	golang.org/x/sys v0.13.0 // indirect
+	golang.org/x/term v0.13.0 // indirect
+	golang.org/x/text v0.13.0 // indirect
+	golang.org/x/time v0.3.0 // indirect
+	golang.org/x/tools v0.6.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20220804142021-4e6b2dfa6612 // indirect
 	google.golang.org/grpc v1.48.0 // indirect
