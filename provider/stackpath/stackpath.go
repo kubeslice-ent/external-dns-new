@@ -198,7 +198,6 @@ func (p *StackPathProvider) getZoneRecords(zoneID string) (dns.ZoneGetZoneRecord
 }
 
 func (p *StackPathProvider) ApplyChanges(ctx context.Context, changes *plan.Changes) error {
-
 	infoString := "Creating " + fmt.Sprint(len(changes.Create)) + " Record(s), Updating " + fmt.Sprint(len(changes.UpdateNew)) + " Record(s), Deleting " + fmt.Sprint(len(changes.Delete)) + " Record(s)"
 
 	//log.Infof(fmt.Sprint(changes))
@@ -247,7 +246,6 @@ func (p *StackPathProvider) ApplyChanges(ctx context.Context, changes *plan.Chan
 }
 
 func (p *StackPathProvider) create(endpoints []*endpoint.Endpoint, zones *[]dns.ZoneZone, zoneIDNameMap *provider.ZoneIDName) error {
-
 	for _, endpoint := range endpoints {
 		for _, zone := range *zones {
 			endpoint.DNSName = strings.Replace(endpoint.DNSName, "-"+zone.GetDomain(), "-at."+zone.GetDomain(), -1)
@@ -276,7 +274,6 @@ func (p *StackPathProvider) create(endpoints []*endpoint.Endpoint, zones *[]dns.
 }
 
 func (p *StackPathProvider) createTarget(zoneID string, domain string, ep *endpoint.Endpoint, target string) error {
-
 	if val, ok := ep.GetProviderSpecificProperty("weight"); ok {
 		if val, err := strconv.Atoi(val.Value); err == nil {
 			if val < 1 {
@@ -408,7 +405,6 @@ func (p *StackPathProvider) deleteCall(zoneID string, recordID string) (*http.Re
 }
 
 func (p *StackPathProvider) update(old []*endpoint.Endpoint, new []*endpoint.Endpoint, zones *[]dns.ZoneZone, zoneIDNameMap *provider.ZoneIDName, records *[]dns.ZoneZoneRecord) error {
-
 	err := p.create(new, zones, zoneIDNameMap)
 	if err != nil {
 		return err
@@ -423,7 +419,6 @@ func (p *StackPathProvider) update(old []*endpoint.Endpoint, new []*endpoint.End
 }
 
 func (p *StackPathProvider) zones() ([]dns.ZoneZone, error) {
-
 	zoneResponse, _, err := p.getZones()
 	if err != nil {
 		return nil, err
@@ -509,7 +504,6 @@ func endpointsByZoneID(zoneNameIDMapper provider.ZoneIDName, endpoints []*endpoi
 }
 
 func recordFromTarget(endpoint *endpoint.Endpoint, target string, records *[]dns.ZoneZoneRecord, domain string, ownerID string) (string, error) {
-
 	name := endpoint.DNSName
 
 	if name == domain {

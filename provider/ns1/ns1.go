@@ -175,7 +175,6 @@ func (p *NS1Provider) Records(ctx context.Context) ([]*endpoint.Endpoint, error)
 
 		for _, record := range zoneData.Records {
 			if provider.SupportedRecordType(record.Type) {
-
 				// Fetch the complete record object from NS1
 				// This is required to get weight and note metadata
 				r, _, err := p.client.GetRecord(zone.Zone, record.Domain, record.Type)
