@@ -356,7 +356,6 @@ func (p *NS1Provider) ns1SubmitChanges(changes []*ns1Change) error {
 
 			if p.dryRun {
 				continue
-
 			}
 
 			switch action {

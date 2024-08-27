@@ -24,6 +24,7 @@ import (
 	"time"
 
 	log "github.com/sirupsen/logrus"
+
 	"sigs.k8s.io/external-dns/endpoint"
 	"sigs.k8s.io/external-dns/plan"
 	"sigs.k8s.io/external-dns/provider"
@@ -54,7 +55,6 @@ type StackPathConfig struct {
 }
 
 func NewStackPathProvider(config StackPathConfig) (*StackPathProvider, error) {
-
 	log.Info("Creating StackPath provider")
 
 	clientID, ok := os.LookupEnv("STACKPATH_CLIENT_ID")
@@ -103,7 +103,6 @@ func NewStackPathProvider(config StackPathConfig) (*StackPathProvider, error) {
 //Base Provider Functions
 
 func (p *StackPathProvider) Records(ctx context.Context) ([]*endpoint.Endpoint, error) {
-
 	log.Info("Getting records from StackPath")
 
 	var endpoints []*endpoint.Endpoint
@@ -114,7 +113,6 @@ func (p *StackPathProvider) Records(ctx context.Context) ([]*endpoint.Endpoint, 
 	}
 
 	for _, zone := range zones {
-
 		recordsResponse, _, err := p.getZoneRecords(zone.GetId())
 		if err != nil {
 			return nil, err
@@ -186,7 +184,6 @@ func (p *StackPathProvider) StackPathStyleRecords() ([]dns.ZoneZoneRecord, error
 				}
 			}
 		}
-
 	}
 
 	return records, nil
@@ -357,9 +354,7 @@ func (p *StackPathProvider) createCall(zoneID string, domain string, endpoint *e
 func (p *StackPathProvider) delete(endpoints []*endpoint.Endpoint, zones *[]dns.ZoneZone, zoneIDNameMap *provider.ZoneIDName, records *[]dns.ZoneZoneRecord) error {
 	for _, endpoint := range endpoints {
 		for _, zone := range *zones {
-
 			endpoint.DNSName = strings.Replace(endpoint.DNSName, "-"+zone.GetDomain(), "-at."+zone.GetDomain(), -1)
-
 		}
 	}
 
