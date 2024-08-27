@@ -162,7 +162,6 @@ func (p *StackPathProvider) Records(ctx context.Context) ([]*endpoint.Endpoint, 
 }
 
 func (p *StackPathProvider) StackPathStyleRecords() ([]dns.ZoneZoneRecord, error) {
-
 	var records []dns.ZoneZoneRecord
 
 	zones, err := p.zones()
@@ -171,7 +170,6 @@ func (p *StackPathProvider) StackPathStyleRecords() ([]dns.ZoneZoneRecord, error
 	}
 
 	for _, zone := range zones {
-
 		recordsResponse, _, err := p.getZoneRecords(zone.GetId())
 		if err != nil || (p.testing && p.dryRun) {
 			return nil, err
@@ -190,7 +188,6 @@ func (p *StackPathProvider) StackPathStyleRecords() ([]dns.ZoneZoneRecord, error
 }
 
 func (p *StackPathProvider) getZoneRecords(zoneID string) (dns.ZoneGetZoneRecordsResponse, *http.Response, error) {
-
 	if p.testing && p.dryRun {
 		return testGetZoneZoneRecordsResponse, nil, fmt.Errorf("testing")
 	} else if p.testing {
