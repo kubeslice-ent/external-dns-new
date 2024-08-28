@@ -24,6 +24,7 @@ import (
 	"time"
 
 	log "github.com/sirupsen/logrus"
+
 	"sigs.k8s.io/external-dns/endpoint"
 	"sigs.k8s.io/external-dns/plan"
 	"sigs.k8s.io/external-dns/provider"
@@ -54,7 +55,6 @@ type StackPathConfig struct {
 }
 
 func NewStackPathProvider(config StackPathConfig) (*StackPathProvider, error) {
-
 	log.Info("Creating StackPath provider")
 
 	clientID, ok := os.LookupEnv("STACKPATH_CLIENT_ID")
@@ -103,7 +103,6 @@ func NewStackPathProvider(config StackPathConfig) (*StackPathProvider, error) {
 //Base Provider Functions
 
 func (p *StackPathProvider) Records(ctx context.Context) ([]*endpoint.Endpoint, error) {
-
 	log.Info("Getting records from StackPath")
 
 	var endpoints []*endpoint.Endpoint
@@ -114,7 +113,6 @@ func (p *StackPathProvider) Records(ctx context.Context) ([]*endpoint.Endpoint, 
 	}
 
 	for _, zone := range zones {
-
 		recordsResponse, _, err := p.getZoneRecords(zone.GetId())
 		if err != nil {
 			return nil, err
@@ -164,7 +162,6 @@ func (p *StackPathProvider) Records(ctx context.Context) ([]*endpoint.Endpoint, 
 }
 
 func (p *StackPathProvider) StackPathStyleRecords() ([]dns.ZoneZoneRecord, error) {
-
 	var records []dns.ZoneZoneRecord
 
 	zones, err := p.zones()
@@ -173,7 +170,6 @@ func (p *StackPathProvider) StackPathStyleRecords() ([]dns.ZoneZoneRecord, error
 	}
 
 	for _, zone := range zones {
-
 		recordsResponse, _, err := p.getZoneRecords(zone.GetId())
 		if err != nil || (p.testing && p.dryRun) {
 			return nil, err
@@ -186,14 +182,12 @@ func (p *StackPathProvider) StackPathStyleRecords() ([]dns.ZoneZoneRecord, error
 				}
 			}
 		}
-
 	}
 
 	return records, nil
 }
 
 func (p *StackPathProvider) getZoneRecords(zoneID string) (dns.ZoneGetZoneRecordsResponse, *http.Response, error) {
-
 	if p.testing && p.dryRun {
 		return testGetZoneZoneRecordsResponse, nil, fmt.Errorf("testing")
 	} else if p.testing {
@@ -204,7 +198,6 @@ func (p *StackPathProvider) getZoneRecords(zoneID string) (dns.ZoneGetZoneRecord
 }
 
 func (p *StackPathProvider) ApplyChanges(ctx context.Context, changes *plan.Changes) error {
-
 	infoString := "Creating " + fmt.Sprint(len(changes.Create)) + " Record(s), Updating " + fmt.Sprint(len(changes.UpdateNew)) + " Record(s), Deleting " + fmt.Sprint(len(changes.Delete)) + " Record(s)"
 
 	//log.Infof(fmt.Sprint(changes))
@@ -253,7 +246,6 @@ func (p *StackPathProvider) ApplyChanges(ctx context.Context, changes *plan.Chan
 }
 
 func (p *StackPathProvider) create(endpoints []*endpoint.Endpoint, zones *[]dns.ZoneZone, zoneIDNameMap *provider.ZoneIDName) error {
-
 	for _, endpoint := range endpoints {
 		for _, zone := range *zones {
 			endpoint.DNSName = strings.Replace(endpoint.DNSName, "-"+zone.GetDomain(), "-at."+zone.GetDomain(), -1)
@@ -282,7 +274,6 @@ func (p *StackPathProvider) create(endpoints []*endpoint.Endpoint, zones *[]dns.
 }
 
 func (p *StackPathProvider) createTarget(zoneID string, domain string, ep *endpoint.Endpoint, target string) error {
-
 	if val, ok := ep.GetProviderSpecificProperty("weight"); ok {
 		if val, err := strconv.Atoi(val.Value); err == nil {
 			if val < 1 {
@@ -357,9 +348,7 @@ func (p *StackPathProvider) createCall(zoneID string, domain string, endpoint *e
 func (p *StackPathProvider) delete(endpoints []*endpoint.Endpoint, zones *[]dns.ZoneZone, zoneIDNameMap *provider.ZoneIDName, records *[]dns.ZoneZoneRecord) error {
 	for _, endpoint := range endpoints {
 		for _, zone := range *zones {
-
 			endpoint.DNSName = strings.Replace(endpoint.DNSName, "-"+zone.GetDomain(), "-at."+zone.GetDomain(), -1)
-
 		}
 	}
 
@@ -416,7 +405,6 @@ func (p *StackPathProvider) deleteCall(zoneID string, recordID string) (*http.Re
 }
 
 func (p *StackPathProvider) update(old []*endpoint.Endpoint, new []*endpoint.Endpoint, zones *[]dns.ZoneZone, zoneIDNameMap *provider.ZoneIDName, records *[]dns.ZoneZoneRecord) error {
-
 	err := p.create(new, zones, zoneIDNameMap)
 	if err != nil {
 		return err
@@ -431,7 +419,6 @@ func (p *StackPathProvider) update(old []*endpoint.Endpoint, new []*endpoint.End
 }
 
 func (p *StackPathProvider) zones() ([]dns.ZoneZone, error) {
-
 	zoneResponse, _, err := p.getZones()
 	if err != nil {
 		return nil, err
@@ -517,7 +504,6 @@ func endpointsByZoneID(zoneNameIDMapper provider.ZoneIDName, endpoints []*endpoi
 }
 
 func recordFromTarget(endpoint *endpoint.Endpoint, target string, records *[]dns.ZoneZoneRecord, domain string, ownerID string) (string, error) {
-
 	name := endpoint.DNSName
 
 	if name == domain {

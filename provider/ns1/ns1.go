@@ -175,7 +175,6 @@ func (p *NS1Provider) Records(ctx context.Context) ([]*endpoint.Endpoint, error)
 
 		for _, record := range zoneData.Records {
 			if provider.SupportedRecordType(record.Type) {
-
 				// Fetch the complete record object from NS1
 				// This is required to get weight and note metadata
 				r, _, err := p.client.GetRecord(zone.Zone, record.Domain, record.Type)
@@ -255,12 +254,17 @@ func (p *NS1Provider) ns1BuildRecord(zoneName string, change *ns1Change) *dns.Re
 
 func (p *NS1Provider) reconcileRecordChanges(record *dns.Record, action string) (*dns.Record, string) {
 	r, _, err := p.client.GetRecord(record.Zone, record.Domain, record.Type)
-
 	// Add the filters back to the posting object
 	// method ns1BuildRecord creats a new record object, which discards the original filters available at ns1
-	// if r != nil {
-	// 	record.Filters = r.Filters
-	// }
+	if r != nil {
+		if r.Filters != nil {
+			if len(r.Filters) == 0 {
+				r.Filters = make([]*filter.Filter, 0)
+				r.Filters = append(r.Filters, filter.NewWeightedShuffle())
+			}
+			record.Filters = r.Filters
+		}
+	}
 
 	switch action {
 	case ns1Create:
@@ -338,7 +342,6 @@ func (p *NS1Provider) ns1SubmitChanges(changes []*ns1Change) error {
 			// So we need to update the records properly while making sure that we are not changing records owned by
 			// other instances
 			record, action := p.reconcileRecordChanges(record, change.Action)
-
 			logFields = log.Fields{
 				"record":  record.Domain,
 				"type":    record.Type,
@@ -346,15 +349,13 @@ func (p *NS1Provider) ns1SubmitChanges(changes []*ns1Change) error {
 				"action":  change.Action,
 				"zone":    zoneName,
 				"Answers": record.Answers,
+				"Filters": record.Filters,
 			}
 			log.WithFields(logFields).Info("record changes after reconcile")
 
 			if p.dryRun {
 				continue
-
 			}
-
-			record.Filters = make([]*filter.Filter, 0)
 
 			switch action {
 			case ns1Create:
